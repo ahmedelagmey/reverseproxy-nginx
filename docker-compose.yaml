@@ -1,0 +1,39 @@
+version: '3'
+
+services:
+  reverseproxy:
+    build: ./reverse-proxy
+    ports:
+      - 80:80
+    depends_on:
+      - App-one
+      - App-two
+    container_name: reverse
+
+  App-one:
+    build: ./App-one
+    ports: 
+      - 8080:80
+    container_name: App-one
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 512M
+        reservations:
+          cpus: '0.5'
+          memory: 256M
+
+  App-two:
+    build: .App-two
+    ports:
+      - 9090:80
+    container_name: App-two
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 512M
+        reservations:
+          cpus: '0.5'
+          memory: 256M
