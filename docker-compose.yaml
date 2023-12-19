@@ -6,15 +6,15 @@ services:
     ports:
       - 80:80
     depends_on:
-      - App-one
-      - App-two
+      - app1
+      - app2
     container_name: reverse
 
-  App-one:
-    build: ./App-one
+  app1:
+    build: ./app1
     ports: 
       - 8080:80
-    container_name: App-one
+    container_name: app1
     deploy:
       resources:
         limits:
@@ -24,11 +24,11 @@ services:
           cpus: '0.5'
           memory: 256M
 
-  App-two:
-    build: .App-two
+  app2:
+    build: ./app2
     ports:
       - 9090:80
-    container_name: App-two
+    container_name: app2
     deploy:
       resources:
         limits:
